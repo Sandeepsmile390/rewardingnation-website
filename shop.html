@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RewardingNation</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="navbar-left">
+                <div class="logo">
+                    <img src="assets/logo.webp" alt="RewardingNation Logo">
+                </div>
+                <a href="index.html" class="nav-link"><span class="nav-icon"><img src="assets/home.png" alt="Home"
+                            style="width:20px;vertical-align:middle;margin-right:6px;"></span> Home</a>
+                <a href="shop.html" class="nav-link active"><span class="nav-icon"><img src="assets/shop.png" alt="Shop"
+                            style="width:20px;vertical-align:middle;margin-right:6px;"></span> Shop</a>
+                <a href="account.html" class="nav-link"><span class="nav-icon"><img src="assets/myprofile.png"
+                            alt="My Account" style="width:20px;vertical-align:middle;margin-right:6px;"></span> My
+                    Account</a>
+                <a href="#" class="nav-link" id="about-link">
+                    <span class="nav-icon">
+                        <img src="assets/about.svg" alt="About" style="width:20px;vertical-align:middle;margin-right:6px;opacity:1;">
+                    </span>
+                    About
+                </a>
+                <div id="about-popup" style="display:none; position:absolute; background:#fff; color:#222; border-radius:14px; border:1.5px solid #e0e0e0; box-shadow:0 8px 32px rgba(0,0,0,0.18); padding:22px 28px 18px 28px; z-index:1000; min-width:260px; max-width:340px; font-size:1rem; font-family:Montserrat,sans-serif; transition:opacity 0.25s, transform 0.25s; opacity:0; transform:translateY(10px);">
+                    <div style="position:absolute;top:-14px;left:36px;width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;border-bottom:14px solid #fff;filter:drop-shadow(0 -2px 2px rgba(0,0,0,0.08));"></div>
+                    <h2 style="margin:0 0 8px 0;font-size:1.2rem;font-weight:700;color:#007bff;letter-spacing:0.5px;">Brands Of Smartcookie</h2>
+                    <p style="margin:0;font-size:0.98rem;line-height:1.6;color:#444;">Low-carb, gluten-free, keto-friendly protein cookies from Smart Baking Company.<br>Example: a 12-pack of chocolate chip SmartCookies is high in protein & fiber, zero net carbs, diabetic-friendly.</p>
+                </div>
+            </div>
+            <div class="navbar-center">
+                <form class="search-bar" onsubmit="return false;">
+                    <select id="category-select">
+                        <option value="">All Categories</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="fashion">Fashion</option>
+                        <option value="books">Books</option>
+                        <option value="grocery">Grocery</option>
+                    </select>
+                    <input type="text" id="search-input" placeholder="Search products...">
+                    <button id="search-button" title="Search">&#128269;</button>
+                </form>
+            </div>
+            <div class="navbar-right">
+                <div class="cart" id="cart-area" title="View Cart">
+                    <span class="cart-icon">&#128722;</span>
+                    <span class="cart-badge" id="cart-badge">0</span>
+                    <span class="cart-price" id="cart-price">$0.00</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scroll-to-top" title="Scroll to Top" aria-label="Scroll to Top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="12" fill="#28a745" />
+            <path d="M12 6l-6 6h4v6h4v-6h4l-6-6z" fill="#fff" />
+        </svg>
+    </button>
+    <div class="chat-popup-overlay" id="chat-popup-overlay"></div>
+    <div class="chat-popup" id="chat-popup">
+        <div class="chat-popup-header">
+            <span>Help & Support Chat</span>
+            <button class="chat-popup-close" id="chat-popup-close" title="Close">&times;</button>
+        </div>
+        <div class="chat-popup-messages" id="chat-popup-messages">
+            <!-- Messages will appear here -->
+        </div>
+        <form class="chat-popup-form" id="chat-popup-form" autocomplete="off">
+            <input type="text" id="chat-popup-input" placeholder="Type your message..." required />
+            <button type="submit" id="chat-popup-send">Send</button>
+        </form>
+    </div>
+
+    <div class="top-category-bar">
+        <div class="top-category-item">
+            <img src="assets/grocery.webp" alt="Grocery">
+            <span>Grocery</span>
+        </div>
+        <div class="top-category-item">
+            <img src="assets/mobiles.webp" alt="Mobiles">
+            <span>Mobiles</span>
+        </div>
+        <div class="top-category-item">
+            <img src="assets/fashion.webp" alt="Fashion">
+            <span>Fashion</span>
+        </div>
+        <div class="top-category-item">
+            <img src="assets/electronics.webp" alt="Electronics">
+            <span>Electronics</span>
+        </div>
+        <div class="top-category-item">
+            <img src="assets/furniture.webp" alt="Home & Furniture">
+            <span>Home & Furniture</span>
+        </div>
+        <div class="top-category-item">
+            <img src="assets/appliances.webp" alt="Appliances">
+            <span>Appliances</span>
+        </div>
+        <div class="top-category-item">
+            <img src="assets/flight.webp" alt="Flight Bookings">
+            <span>Flight Bookings</span>
+        </div>
+        <div class="top-category-item">
+            <img src="assets/beauty.webp" alt="Beauty, Toys & More">
+            <span>Beauty, Toys & More</span>
+        </div>
+        <div class="top-category-item">
+            <img src="assets/twowheelers.webp" alt="Two Wheelers">
+            <span>Two Wheelers</span>
+        </div>
+    </div>
+
+    <div class="shop-main-layout" style="display:flex; gap:32px; max-width:1200px; margin:32px auto;">
+        <!-- Main Shop Content -->
+        <div class="shop-content" style="flex:1; min-width:0;">
+            <!-- Swiper Main Slider (replaces filter-slider) -->
+            <div class="main-slider-outer">
+              <div class="swiper-container main-slider loading">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <img src="assets/shopslider1.jpg" alt="Slide 1" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="assets/shopslider2.jpg" alt="Slide 2" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="assets/shopslider3.jpg" alt="Slide 3" />
+                  </div>
+                  <!-- Add more slides as needed -->
+                </div>
+                <!-- Swiper pagination dots -->
+                <div class="swiper-pagination"></div>
+                <!-- Navigation buttons for Swiper (keep for Swiper functionality, but can be hidden with CSS) -->
+                <div class="swiper-button-prev swiper-button-white" style="display:none;"></div>
+                <div class="swiper-button-next swiper-button-white" style="display:none;"></div>
+              </div>
+            </div>
+            <!-- Old filter-slider-container (commented out for now) -->
+            <!--
+            <div class="filter-slider-container">
+                <button class="filter-slider-arrow left" aria-label="Previous">&#10094;</button>
+                <div class="filter-slider-track">
+                    <div class="filter-slide"><img src="assets/slider1.png" alt="Slide 1"></div>
+                    <div class="filter-slide"><img src="assets/slider2.png" alt="Slide 2"></div>
+                    <div class="filter-slide"><img src="assets/slider3.png" alt="Slide 3"></div>
+                </div>
+                <button class="filter-slider-arrow right" aria-label="Next">&#10095;</button>
+            </div>
+            -->
+            <section class="shop-filters-bar">
+                <h3><svg style="vertical-align:middle;margin-right:6px;" width="20" height="20" fill="none" stroke="#007bff" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg> Refine Your Search</h3>
+                <label title="Filter by price">
+                    <svg style="vertical-align:middle;margin-right:4px;" width="18" height="18" fill="none" stroke="#007bff" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="7" rx="2"/><path d="M16 11V7a4 4 0 0 0-8 0v4"/></svg>
+                    Price:
+                    <input type="range" min="0" max="1000" step="10">
+                    <span style="margin-left:8px;font-size:0.98rem;color:#007bff;font-weight:600;">$0 - $1000</span>
+                </label>
+                <label title="Show only in-stock products">
+                    <svg style="vertical-align:middle;margin-right:4px;" width="18" height="18" fill="none" stroke="#007bff" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M7 13l3 3 7-7"/></svg>
+                    <input type="checkbox"> In Stock
+                </label>
+                <label title="Show only products on sale">
+                    <svg style="vertical-align:middle;margin-right:4px;" width="18" height="18" fill="none" stroke="#f857a6" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12l2 2 4-4"/></svg>
+                    <input type="checkbox"> On Sale
+                </label>
+                <label title="Filter by brand">
+                    <svg style="vertical-align:middle;margin-right:4px;" width="18" height="18" fill="none" stroke="#007bff" stroke-width="2" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M8 8h8v8H8z"/></svg>
+                    Brand:
+                    <select>
+                        <option>All</option>
+                        <option>Brand A</option>
+                        <option>Brand B</option>
+                    </select>
+                </label>
+               
+            </section>
+            <!-- Featured Carousel -->
+            <section class="shop-featured-carousel" style="margin-bottom:32px;">
+                <h2 style="color:#222; font-size:1.5rem; font-weight:700; margin-bottom:12px;">Featured Products</h2>
+                <!-- Product Carousel -->
+                <div class="carousel-track-wrapper"
+                    style="background:none; border-radius:12px; padding:18px; display:flex; gap:24px; overflow-x:auto; position:relative; align-items:center;">
+                    <button class="carousel-arrow left"
+                        style="position:absolute; left:0; top:50%; transform:translateY(-50%); background:transparent; border:none; box-shadow:none; width:44px; height:44px; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:2;">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="12" fill="#007bff" />
+                            <path d="M14 8l-4 4 4 4" stroke="#fff" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                    <div class="carousel-track"
+                        style="display:flex; gap:24px; overflow-x:auto; scroll-behavior:smooth;">
+                        <div class="carousel-item"
+                            style="min-width:220px; background:#fff; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.07); padding:16px;">
+                            <img src="assets/product1.jpg" alt="Product 1"
+                                style="width:100%; border-radius:8px; margin-bottom:10px;">
+                            <h3>Featured Product</h3>
+                            <span class="product-price">$25.00</span>
+                        </div>
+                        <div class="carousel-item"
+                            style="min-width:220px; background:#fff; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.07); padding:16px;">
+                            <img src="assets/product2.jpg" alt="Product 2"
+                                style="width:100%; border-radius:8px; margin-bottom:10px;">
+                            <h3>Gift Card</h3>
+                            <span class="product-price">$25.00</span>
+                        </div>
+                        <div class="carousel-item"
+                            style="min-width:220px; background:#fff; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.07); padding:16px;">
+                            <img src="assets/product3.jpg" alt="Product 3"
+                                style="width:100%; border-radius:8px; margin-bottom:10px;">
+                            <h3>Headphones</h3>
+                            <span class="product-price">$25.00</span>
+                        </div>
+                        <div class="carousel-item"
+                            style="min-width:220px; background:#fff; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.07); padding:16px;">
+                            <img src="assets/product4.jpg" alt="Product 4"
+                                style="width:100%; border-radius:8px; margin-bottom:10px;">
+                            <h3>Smart Watch</h3>
+                            <span class="product-price">$45.00</span>
+                        </div>
+                        <div class="carousel-item"
+                            style="min-width:220px; background:#fff; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.07); padding:16px;">
+                            <img src="assets/product2.jpg" alt="Product 2"
+                                style="width:100%; border-radius:8px; margin-bottom:10px;">
+                            <h3>Gift Card</h3>
+                            <span class="product-price">$25.00</span>
+                        </div>
+                        <div class="carousel-item"
+                            style="min-width:220px; background:#fff; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.07); padding:16px;">
+                            <img src="assets/product2.jpg" alt="Product 2"
+                                style="width:100%; border-radius:8px; margin-bottom:10px;">
+                            <h3>Gift Card</h3>
+                            <span class="product-price">$25.00</span>
+                        </div>
+                        <div class="carousel-item"
+                            style="min-width:220px; background:#fff; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.07); padding:16px;">
+                            <img src="assets/product2.jpg" alt="Product 2"
+                                style="width:100%; border-radius:8px; margin-bottom:10px;">
+                            <h3>Gift Card</h3>
+                            <span class="product-price">$25.00</span>
+                        </div>
+                        <div class="carousel-item"
+                            style="min-width:220px; background:#fff; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.07); padding:16px;">
+                            <img src="assets/product2.jpg" alt="Product 2"
+                                style="width:100%; border-radius:8px; margin-bottom:10px;">
+                            <h3>Gift Card</h3>
+                            <span class="product-price">$25.00</span>
+                        </div>
+                    </div>
+                    <button class="carousel-arrow right"
+                        style="position:absolute; right:0; top:50%; transform:translateY(-50%); background:transparent; border:none; box-shadow:none; width:44px; height:44px; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:2;">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="12" fill="#007bff" />
+                            <path d="M10 8l4 4-4 4" stroke="#fff" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Promo Banner -->
+            <section class="shop-promo-banner"
+                style="background:linear-gradient(90deg,#a259ff 0%,#f857a6 100%); color:#fff; border-radius:12px; padding:18px 32px; margin-bottom:32px; text-align:center; display:flex; align-items:center; justify-content:center; gap:18px;">
+                <strong>🔥 Limited Time Offer: Get 20% Extra Points on Every Purchase! 🔥</strong>
+                <span id="deal-timer" style="background:rgba(0,0,0,0.13); border-radius:8px; padding:6px 18px; font-size:1.1rem; font-weight:700; margin-left:18px; letter-spacing:1px;"></span>
+            </section>
+
+            <!-- Product Grid -->
+            <section class="shop-product-grid">
+                <h2 style="color:#222; font-size:1.5rem; font-weight:700; margin-bottom:18px;">All Products</h2>
+                <div class="product-grid"
+                    style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:32px;">
+                    <!-- Example Product Card -->
+                    <div class="product-card"
+                        style="background:#fff; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.07); padding:18px; position:relative;">
+                        <div class="wishlist-btn" onclick="this.classList.toggle('hearted')" style="position:absolute; top:12px; right:12px; cursor:pointer;">
+                            <svg class="wishlist-heart" viewBox="0 0 24 24"><path d="M12.1 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54l-1.35 1.31z"/></svg>
+                        </div>
+                        <img src="assets/product3.jpg" alt="Product 3"
+                            style="width:100%; border-radius:8px; margin-bottom:10px;">
+                        <h3>Headphones</h3>
+                        <span class="product-price">$25.00</span>
+                        <div class="product-rating" style="color:#ffe066; margin:6px 0;">★★★★★</div>
+                        <button class="add-to-cart-btn explore-btn"
+                            style="background:linear-gradient(90deg,#007bff 0%,#00c6ff 100%); color:#fff; border:none; border-radius:8px; padding:8px 0; width:100%; font-weight:600; margin-top:8px; cursor:pointer;">Add
+                            to Cart</button>
+                        <span class="product-badge"
+                            style="position:absolute; top:12px; left:12px; background:#007bff; color:#fff; border-radius:8px; padding:2px 10px; font-size:0.9rem; font-weight:600;">New</span>
+                    </div>
+                    <div class="product-card"
+                        style="background:#fff; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.07); padding:18px; position:relative;">
+                        <div class="wishlist-btn" onclick="this.classList.toggle('hearted')" style="position:absolute; top:12px; right:12px; cursor:pointer;">
+                            <svg class="wishlist-heart" viewBox="0 0 24 24"><path d="M12.1 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54l-1.35 1.31z"/></svg>
+                        </div>
+                        <img src="assets/product4.jpg" alt="Product 4"
+                            style="width:100%; border-radius:8px; margin-bottom:10px;">
+                        <h3>Smart Watch</h3>
+                        <span class="product-price">$45.00</span>
+                        <div class="product-rating" style="color:#ffe066; margin:6px 0;">★★★★☆</div>
+                        <button class="add-to-cart-btn explore-btn"
+                            style="background:linear-gradient(90deg,#007bff 0%,#00c6ff 100%); color:#fff; border:none; border-radius:8px; padding:8px 0; width:100%; font-weight:600; margin-top:8px; cursor:pointer;">Add
+                            to Cart</button>
+                        <span class="product-badge"
+                            style="position:absolute; top:12px; left:12px; background:#f857a6; color:#fff; border-radius:8px; padding:2px 10px; font-size:0.9rem; font-weight:600;">Hot</span>
+                    </div>
+                    <div class="product-card"
+                        style="background:#fff; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.07); padding:18px; position:relative;">
+                        <div class="wishlist-btn" onclick="this.classList.toggle('hearted')" style="position:absolute; top:12px; right:12px; cursor:pointer;">
+                            <svg class="wishlist-heart" viewBox="0 0 24 24"><path d="M12.1 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54l-1.35 1.31z"/></svg>
+                        </div>
+                        <img src="assets/product5.jpg" alt="Product 5"
+                            style="width:100%; border-radius:8px; margin-bottom:10px;">
+                        <h3>Backpack</h3>
+                        <span class="product-price">$35.00</span>
+                        <div class="product-rating" style="color:#ffe066; margin:6px 0;">★★★☆☆</div>
+                        <button class="add-to-cart-btn explore-btn"
+                            style="background:linear-gradient(90deg,#007bff 0%,#00c6ff 100%); color:#fff; border:none; border-radius:8px; padding:8px 0; width:100%; font-weight:600; margin-top:8px; cursor:pointer;">Add
+                            to Cart</button>
+                    </div>
+                    <div class="product-card"
+                        style="background:#fff; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.07); padding:18px; position:relative;">
+                        <div class="wishlist-btn" onclick="this.classList.toggle('hearted')" style="position:absolute; top:12px; right:12px; cursor:pointer;">
+                            <svg class="wishlist-heart" viewBox="0 0 24 24"><path d="M12.1 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54l-1.35 1.31z"/></svg>
+                        </div>
+                        <img src="assets/product6.jpg" alt="Product 6"
+                            style="width:100%; border-radius:8px; margin-bottom:10px;">
+                        <h3>Bluetooth Speaker</h3>
+                        <span class="product-price">$29.00</span>
+                        <div class="product-rating" style="color:#ffe066; margin:6px 0;">★★★★★</div>
+                        <button class="add-to-cart-btn explore-btn"
+                            style="background:linear-gradient(90deg,#007bff 0%,#00c6ff 100%); color:#fff; border:none; border-radius:8px; padding:8px 0; width:100%; font-weight:600; margin-top:8px; cursor:pointer;">Add
+                            to Cart</button>
+                    </div>
+                    <div class="product-card"
+                        style="background:#fff; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.07); padding:18px; position:relative;">
+                        <div class="wishlist-btn" onclick="this.classList.toggle('hearted')" style="position:absolute; top:12px; right:12px; cursor:pointer;">
+                            <svg class="wishlist-heart" viewBox="0 0 24 24"><path d="M12.1 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54l-1.35 1.31z"/></svg>
+                        </div>
+                        <img src="assets/product7.jpg" alt="Product 7"
+                            style="width:100%; border-radius:8px; margin-bottom:10px;">
+                        <h3>Jar</h3>
+                        <span class="product-price">$19.00</span>
+                        <div class="product-rating" style="color:#ffe066; margin:6px 0;">★★★☆☆</div>
+                        <button class="add-to-cart-btn explore-btn"
+                            style="background:linear-gradient(90deg,#007bff 0%,#00c6ff 100%); color:#fff; border:none; border-radius:8px; padding:8px 0; width:100%; font-weight:600; margin-top:8px; cursor:pointer;">Add
+                            to Cart</button>
+                    </div>
+                    <div class="product-card"
+                        style="background:#fff; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.07); padding:18px; position:relative;">
+                        <div class="wishlist-btn" onclick="this.classList.toggle('hearted')" style="position:absolute; top:12px; right:12px; cursor:pointer;">
+                            <svg class="wishlist-heart" viewBox="0 0 24 24"><path d="M12.1 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54l-1.35 1.31z"/></svg>
+                        </div>
+                        <img src="assets/product8.jpg" alt="Product 8"
+                            style="width:100%; border-radius:8px; margin-bottom:10px;">
+                        <h3>Bluetooth Speaker</h3>
+                        <span class="product-price">$29.00</span>
+                        <div class="product-rating" style="color:#ffe066; margin:6px 0;">★★★★☆</div>
+                        <button class="add-to-cart-btn explore-btn"
+                            style="background:linear-gradient(90deg,#007bff 0%,#00c6ff 100%); color:#fff; border:none; border-radius:8px; padding:8px 0; width:100%; font-weight:600; margin-top:8px; cursor:pointer;">Add
+                            to Cart</button>
+                    </div>
+                    <div class="product-card"
+                        style="background:#fff; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.07); padding:18px; position:relative;">
+                        <div class="wishlist-btn" onclick="this.classList.toggle('hearted')" style="position:absolute; top:12px; right:12px; cursor:pointer;">
+                            <svg class="wishlist-heart" viewBox="0 0 24 24"><path d="M12.1 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54l-1.35 1.31z"/></svg>
+                        </div>
+                        <img src="assets/product1.jpg" alt="Product 1"
+                            style="width:100%; border-radius:8px; margin-bottom:10px;">
+                        <h3>Fitness Band</h3>
+                        <span class="product-price">$39.00</span>
+                        <div class="product-rating" style="color:#ffe066; margin:6px 0;">★★★★☆</div>
+                        <button class="add-to-cart-btn explore-btn"
+                            style="background:linear-gradient(90deg,#007bff 0%,#00c6ff 100%); color:#fff; border:none; border-radius:8px; padding:8px 0; width:100%; font-weight:600; margin-top:8px; cursor:pointer;">Add
+                            to Cart</button>
+                        <span class="product-badge"
+                            style="position:absolute; top:12px; left:12px; background:#28a745; color:#fff; border-radius:8px; padding:2px 10px; font-size:0.9rem; font-weight:600;">Best Seller</span>
+                    </div>
+                    <div class="product-card"
+                        style="background:#fff; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.07); padding:18px; position:relative;">
+                        <div class="wishlist-btn" onclick="this.classList.toggle('hearted')" style="position:absolute; top:12px; right:12px; cursor:pointer;">
+                            <svg class="wishlist-heart" viewBox="0 0 24 24"><path d="M12.1 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54l-1.35 1.31z"/></svg>
+                        </div>
+                        <img src="assets/product2.jpg" alt="Product 2"
+                            style="width:100%; border-radius:8px; margin-bottom:10px;">
+                        <h3>Gift Card</h3>
+                        <span class="product-price">$50.00</span>
+                        <div class="product-rating" style="color:#ffe066; margin:6px 0;">★★★★★</div>
+                        <button class="add-to-cart-btn explore-btn"
+                            style="background:linear-gradient(90deg,#007bff 0%,#00c6ff 100%); color:#fff; border:none; border-radius:8px; padding:8px 0; width:100%; font-weight:600; margin-top:8px; cursor:pointer;">Add
+                            to Cart</button>
+                    </div>
+                    <div class="product-card"
+                        style="background:#fff; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.07); padding:18px; position:relative;">
+                        <div class="wishlist-btn" onclick="this.classList.toggle('hearted')" style="position:absolute; top:12px; right:12px; cursor:pointer;">
+                            <svg class="wishlist-heart" viewBox="0 0 24 24"><path d="M12.1 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54l-1.35 1.31z"/></svg>
+                        </div>
+                        <img src="assets/product6.jpg" alt="Product 6"
+                            style="width:100%; border-radius:8px; margin-bottom:10px;">
+                        <h3>Bluetooth Speaker</h3>
+                        <span class="product-price">$29.00</span>
+                        <div class="product-rating" style="color:#ffe066; margin:6px 0;">★★★★★</div>
+                        <button class="add-to-cart-btn explore-btn"
+                            style="background:linear-gradient(90deg,#007bff 0%,#00c6ff 100%); color:#fff; border:none; border-radius:8px; padding:8px 0; width:100%; font-weight:600; margin-top:8px; cursor:pointer;">Add
+                            to Cart</button>
+                    </div>
+                    <div class="product-card"
+                        style="background:#fff; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.07); padding:18px; position:relative;">
+                        <div class="wishlist-btn" onclick="this.classList.toggle('hearted')" style="position:absolute; top:12px; right:12px; cursor:pointer;">
+                            <svg class="wishlist-heart" viewBox="0 0 24 24"><path d="M12.1 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54l-1.35 1.31z"/></svg>
+                        </div>
+                        <img src="assets/product7.jpg" alt="Product 7"
+                            style="width:100%; border-radius:8px; margin-bottom:10px;">
+                        <h3>Portable Jar</h3>
+                        <span class="product-price">$22.00</span>
+                        <div class="product-rating" style="color:#ffe066; margin:6px 0;">★★★☆☆</div>
+                        <button class="add-to-cart-btn explore-btn"
+                            style="background:linear-gradient(90deg,#007bff 0%,#00c6ff 100%); color:#fff; border:none; border-radius:8px; padding:8px 0; width:100%; font-weight:600; margin-top:8px; cursor:pointer;">Add
+                            to Cart</button>
+                    </div>
+                </div>
+                <!-- Pagination Bar -->
+                <div class="shop-pagination"
+                    style="display:flex; justify-content:center; align-items:center; gap:10px; margin:32px 0 0 0;">
+                    <button
+                        style="background:#fff; border:1.5px solid #007bff; color:#007bff; border-radius:8px; padding:6px 14px; font-weight:600; cursor:pointer;">1</button>
+                    <button
+                        style="background:#fff; border:1.5px solid #007bff; color:#007bff; border-radius:8px; padding:6px 14px; font-weight:600; cursor:pointer;">2</button>
+                    <button
+                        style="background:#fff; border:1.5px solid #007bff; color:#007bff; border-radius:8px; padding:6px 14px; font-weight:600; cursor:pointer;">3</button>
+                    <span style="color:#007bff; font-weight:700;">...</span>
+                    <button
+                        style="background:#fff; border:1.5px solid #007bff; color:#007bff; border-radius:8px; padding:6px 14px; font-weight:600; cursor:pointer;">Next
+                        &rarr;</button>
+                </div>
+            </section>
+
+            <!-- Recently Viewed Products -->
+            <section class="shop-recently-viewed" style="margin-top:48px;">
+                <h2 style="color:#222; font-size:1.2rem; font-weight:700; margin-bottom:12px;">Recently Viewed</h2>
+                <div class="recently-viewed-track" style="display:flex; gap:18px; overflow-x:auto;">
+                    <div class="recently-viewed-item"
+                        style="min-width:120px; background:#fff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.07); padding:10px;">
+                        <img src="assets/product4.jpg" alt="Product 4" style="width:100%; border-radius:6px;">
+                    </div>
+                    <!-- Add more recently viewed -->
+                </div>
+            </section>
+
+            <!-- Trust Badges -->
+            <section class="shop-trust-badges" style="margin:40px 0 0 0; text-align:center;">
+                <img src="assets/secure.png" alt="Secure Payments"
+                    style="height:38px; margin:0 18px; vertical-align:middle;">
+                <span style="color:#007bff; font-weight:600;">100% Secure Payments</span>
+                <span style="color:#007bff; font-weight:600; margin-left:24px;">Easy Returns</span>
+                <span style="color:#007bff; font-weight:600; margin-left:24px;">24/7 Support</span>
+            </section>
+        </div>
+    </div>
+
+    <!-- Product Details Modal (hidden by default) -->
+    <div class="product-modal" id="product-modal"
+        style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.25); z-index:3000; align-items:center; justify-content:center;">
+        <div class="product-modal-content"
+            style="background:#fff; border-radius:16px; max-width:480px; width:90vw; padding:32px; box-shadow:0 8px 32px rgba(0,0,0,0.18); position:relative;">
+            <button class="product-modal-close"
+                style="position:absolute; top:18px; right:18px; background:none; border:none; font-size:2rem; color:#007bff; cursor:pointer;">&times;</button>
+            <img src="assets/product3.jpg" alt="Product Detail"
+                style="width:100%; border-radius:12px; margin-bottom:18px;">
+            <h2>Product Name</h2>
+            <p>Full product description goes here. Includes features, details, and more.</p>
+            <span class="product-price" style="font-size:1.2rem; font-weight:700; color:#007bff;">$25.00</span>
+            <button class="add-to-cart-btn explore-btn"
+                style="background:linear-gradient(90deg,#007bff 0%,#00c6ff 100%); color:#fff; border:none; border-radius:8px; padding:10px 0; width:100%; font-weight:600; margin-top:18px; cursor:pointer;">Add
+                to Cart</button>
+        </div>
+    </div>
+   <footer class="site-footer">
+        <div class="footer-row">
+            <div class="footer-newsletter">
+                <form class="newsletter-signup">
+                    <div class="newsletter-row">
+                        <input type="email" id="footer-newsletter-email" placeholder="Enter your email" required>
+                        <button type="submit">Subscribe</button>
+                    </div>
+                </form>
+            </div>
+            <div class="how-it-works">
+                <a href="#" title="Facebook" class="social-icon"><img src="assets/facebook.svg" alt="Facebook"></a>
+                <a href="#" title="Instagram" class="social-icon"><img src="assets/instagram.svg" alt="Instagram"></a>
+                <a href="#" title="YouTube" class="social-icon"><img src="assets/youtube.svg" alt="YouTube"></a>
+                <a href="#" title="VK" class="social-icon"><img src="assets/vk.svg" alt="VK"></a>
+                <a href="#" title="Twitter" class="social-icon"><img src="assets/twitter.svg" alt="Twitter"></a>
+            </div>
+        </div>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>Shop Location</h4>
+                <p>
+                    <img src="assets/location.png" alt="Location"
+                        style="width:18px;vertical-align:middle;margin-right:6px;">
+                    Pune, Maharashtra <br>
+                    <img src="assets/telephone.png" alt="Telephone"
+                        style="width:18px;vertical-align:middle;margin-right:6px;">
+                    (123) 456-7890 <br>
+                    <img src="assets/email.png" alt="Email" style="width:18px;vertical-align:middle;margin-right:6px;">
+                    support@rewardingnation.com <br>
+                    🏢 BPSI
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="account.html">My Account</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Recent Posts</h4>
+                <ul>
+                    <li><a href="#">How to Redeem Points</a></li>
+                    <li><a href="#">Top 10 Reward Products</a></li>
+                    <li><a href="#">Exclusive Offers</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>About</h4>
+                <p>RewardingNation is your trusted platform for redeeming points and discovering exclusive deals. Join
+                    us and start earning today!</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            Copyright 2023 © All rights reserved by RewardingNation | Created by Sandeep
+        </div>
+    </footer>
+
+    <div class="help-support-sticky" title="Help & Support">
+      <span class="help-support-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="12" fill="#007bff"/>
+          <path d="M8 10.5C8 9.11929 9.11929 8 10.5 8H13.5C14.8807 8 16 9.11929 16 10.5C16 11.3284 15.3284 12 14.5 12H12V13.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="12" cy="17" r="1" fill="#fff"/>
+        </svg>
+      </span>
+      <span class="help-support-text">Help & Support</span>
+    </div>
+
+</body>
+<script src="main.js" defer></script>
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+<script>
+// About popup logic
+const aboutLink = document.getElementById('about-link');
+const aboutPopup = document.getElementById('about-popup');
+document.addEventListener('click', function(e) {
+    if (aboutLink.contains(e.target)) {
+        e.preventDefault();
+        const rect = aboutLink.getBoundingClientRect();
+        aboutPopup.style.left = rect.left + window.scrollX + 'px';
+        aboutPopup.style.top = rect.bottom + window.scrollY + 8 + 'px';
+        if (aboutPopup.style.display === 'block') {
+            aboutPopup.style.opacity = '0';
+            aboutPopup.style.transform = 'translateY(10px)';
+            setTimeout(()=>{aboutPopup.style.display = 'none';}, 200);
+        } else {
+            aboutPopup.style.display = 'block';
+            setTimeout(()=>{
+              aboutPopup.style.opacity = '1';
+              aboutPopup.style.transform = 'translateY(0)';
+            }, 10);
+        }
+    } else if (!aboutPopup.contains(e.target)) {
+        if (aboutPopup.style.display === 'block') {
+            aboutPopup.style.opacity = '0';
+            aboutPopup.style.transform = 'translateY(10px)';
+            setTimeout(()=>{aboutPopup.style.display = 'none';}, 200);
+        }
+    }
+});
+</script>
+
+</html>

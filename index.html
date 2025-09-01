@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RewardingNation</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <header>
+         <nav class="navbar">
+            <div class="navbar-left">
+                <div class="logo">
+                    <img src="assets/logo.webp" alt="RewardingNation Logo">
+                </div>
+                <a href="index.html" class="nav-link active"><span class="nav-icon"><img src="assets/home.png" alt="Home"
+                            style="width:20px;vertical-align:middle;margin-right:6px;"></span> Home</a>
+                <a href="shop.html" class="nav-link"><span class="nav-icon"><img src="assets/shop.png" alt="Shop"
+                            style="width:20px;vertical-align:middle;margin-right:6px;"></span> Shop</a>
+                <a href="account.html" class="nav-link"><span class="nav-icon"><img src="assets/myprofile.png"
+                            alt="My Account" style="width:20px;vertical-align:middle;margin-right:6px;"></span> My
+                    Account</a>
+                <a href="#" class="nav-link" id="about-link">
+                    <span class="nav-icon">
+                        <img src="assets/about.svg" alt="About" style="width:20px;vertical-align:middle;margin-right:6px;opacity:1;">
+                    </span>
+                    About
+                </a>
+                <div id="about-popup" style="display:none; position:absolute; background:#fff; color:#222; border-radius:14px; border:1.5px solid #e0e0e0; box-shadow:0 8px 32px rgba(0,0,0,0.18); padding:22px 28px 18px 28px; z-index:1000; min-width:260px; max-width:340px; font-size:1rem; font-family:Montserrat,sans-serif; transition:opacity 0.25s, transform 0.25s; opacity:0; transform:translateY(10px);">
+                    <div style="position:absolute;top:-14px;left:36px;width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;border-bottom:14px solid #fff;filter:drop-shadow(0 -2px 2px rgba(0,0,0,0.08));"></div>
+                    <h2 style="margin:0 0 8px 0;font-size:1.2rem;font-weight:700;color:#007bff;letter-spacing:0.5px;">Brands Of Smartcookie</h2>
+                    <p style="margin:0;font-size:0.98rem;line-height:1.6;color:#444;">Low-carb, gluten-free, keto-friendly protein cookies from Smart Baking Company.<br>Example: a 12-pack of chocolate chip SmartCookies is high in protein & fiber, zero net carbs, diabetic-friendly.</p>
+                </div>
+            </div>
+            <div class="navbar-center">
+                <form class="search-bar" onsubmit="return false;">
+                    <select id="category-select">
+                        <option value="">All Categories</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="fashion">Fashion</option>
+                        <option value="books">Books</option>
+                        <option value="grocery">Grocery</option>
+                    </select>
+                    <input type="text" id="search-input" placeholder="Search products...">
+                    <button id="search-button" title="Search">&#128269;</button>
+                </form>
+            </div>
+            <div class="navbar-right">
+                <div class="cart" id="cart-area" title="View Cart">
+                    <span class="cart-icon">&#128722;</span>
+                    <span class="cart-badge" id="cart-badge">0</span>
+                    <span class="cart-price" id="cart-price">$0.00</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Hero Section / Banner -->
+    <section class="shop-hero-banner"
+        style="background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%); color: #fff; padding: 48px 0 32px 0; text-align: center;">
+        <h2 id="typewriter-text"></h2>
+        <h3 id="typewriter-text-2" style="margin-top: 0.5em; color: #111;"></h3>
+        <p style="font-size:1.2rem; margin-bottom:18px;">Redeem your points for exclusive products and deals!</p>
+        <button class="explore-btn"
+            style="background: linear-gradient(90deg, #a259ff 0%, #f857a6 100%); color: #fff; border:none; border-radius:24px; padding:12px 32px; font-size:1.1rem; font-weight:600; cursor:pointer; box-shadow:0 2px 12px rgba(0,123,255,0.10);"
+            onclick="window.location.href='shop.html'">Shop Now</button>
+    </section>
+
+
+    <main>
+        
+        <div class="main-hero-row">
+            <aside class="coupons-section">
+                <div class="coupons-title">EXCLUSIVE COUPONS</div>
+                <div class="coupons-list">
+                    <div class="coupon-item active">
+                        <div class="coupon-header">
+                            <span class="coupon-code">SAVE20</span>
+                            <span class="coupon-discount">20% OFF</span>
+                        </div>
+                        <div class="coupon-details">
+                            <p>On Electronics & Gadgets</p>
+                            <span class="coupon-expiry">Expires: Dec 31, 2024</span>
+                        </div>
+                        <button class="coupon-btn">Use Coupon</button>
+                    </div>
+                    <div class="coupon-item">
+                        <div class="coupon-header">
+                            <span class="coupon-code">FASHION15</span>
+                            <span class="coupon-discount">15% OFF</span>
+                        </div>
+                        <div class="coupon-details">
+                            <p>On Fashion & Apparel</p>
+                            <span class="coupon-expiry">Expires: Dec 25, 2024</span>
+                        </div>
+                        <button class="coupon-btn">Use Coupon</button>
+                    </div>
+                    <div class="coupon-item">
+                        <div class="coupon-header">
+                            <span class="coupon-code">FIRST10</span>
+                            <span class="coupon-discount">10% OFF</span>
+                        </div>
+                        <div class="coupon-details">
+                            <p>First Time Purchase</p>
+                            <span class="coupon-expiry">Expires: Dec 20, 2024</span>
+                        </div>
+                        <button class="coupon-btn">Use Coupon</button>
+                    </div>
+                    <div class="coupon-item">
+                        <div class="coupon-header">
+                            <span class="coupon-code">FLASH25</span>
+                            <span class="coupon-discount">25% OFF</span>
+                        </div>
+                        <div class="coupon-details">
+                            <p>Flash Sale - Limited Time</p>
+                            <span class="coupon-expiry">Expires: Dec 15, 2024</span>
+                        </div>
+                        <button class="coupon-btn">Use Coupon</button>
+                    </div>
+                    <div class="coupon-item">
+                        <div class="coupon-header">
+                            <span class="coupon-code">BEAUTY30</span>
+                            <span class="coupon-discount">30% OFF</span>
+                        </div>
+                        <div class="coupon-details">
+                            <p>On Beauty Products</p>
+                            <span class="coupon-expiry">Expires: Dec 28, 2024</span>
+                        </div>
+                        <button class="coupon-btn">Use Coupon</button>
+                    </div>
+                </div>
+            </aside>
+            <div class="slider-container">
+                <div class="slider">
+                    <div class="slide active">
+                        <img src="assets/slider1.png" alt="Rewarding Offer 1" loading="lazy">
+                        <div class="slide-caption">
+                            <h2>Welcome to RewardingNation</h2>
+                            <p>Redeem your points for amazing rewards!</p>
+                            <button class="explore-btn">Explore Now</button>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="assets/slider2.png" alt="Rewarding Offer 2" loading="lazy">
+                        <div class="slide-caption">
+                            <h2>Exclusive Deals</h2>
+                            <p>Shop top brands and save more with your rewards.</p>
+                            <button class="explore-btn">Explore Now</button>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="assets/slider3.png" alt="Rewarding Offer 3" loading="lazy">
+                        <div class="slide-caption">
+                            <h2>Instant Redemption</h2>
+                            <p>Fast, easy, and secure reward redemption process.</p>
+                            <button class="explore-btn">Explore Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+        </div>
+        <!-- Product Carousel Start -->
+        <h2 class="carousel-heading">Product Carousel</h2>
+        <div class="carousel-underline"></div>
+        <div class="carousel-container" id="carousel-section">
+            <button class="carousel-arrow left" id="carousel-prev" aria-label="Previous"
+                style="position:absolute; left:0; top:50%; transform:translateY(-50%); background:transparent; border:none; box-shadow:none; width:44px; height:44px; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:2;">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="12" fill="#007bff" />
+                    <path d="M14 8l-4 4 4 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
+            <div class="carousel-track-wrapper">
+                <div class="carousel-track" id="carousel-track">
+                    <div class="carousel-item">
+                        <img src="assets/product1.jpg" alt="Product 1" loading="lazy">
+                        <h3>New Product</h3>
+                        <p>Exciting features</p>
+                        <span class="product-price">$25.00</span>
+                        <button class="carousel-btn">Redeem</button>
+                        <span class="product-badge">New</span>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="assets/product2.jpg" alt="Product 2" loading="lazy">
+                        <h3>Gift Card</h3>
+                        <p>Redeem for top brands</p>
+                        <span class="product-price">$25.00</span>
+                        <button class="carousel-btn">Redeem</button>
+                        <span class="product-badge">New</span>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="assets/product3.jpg" alt="Product 3" loading="lazy">
+                        <h3>Headphones</h3>
+                        <p>High quality sound</p>
+                        <span class="product-price">$25.00</span>
+                        <button class="carousel-btn">Redeem</button>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="assets/product4.jpg" alt="Product 4" loading="lazy">
+                        <h3>Smart Watch</h3>
+                        <p>Track your fitness</p>
+                        <span class="product-price">$25.00</span>
+                        <button class="carousel-btn">Redeem</button>
+                        <span class="product-badge">Hot</span>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="assets/product5.jpg" alt="Product 5" loading="lazy">
+                        <h3>Backpack</h3>
+                        <p>Stylish & Durable</p>
+                        <span class="product-price">$25.00</span>
+                        <button class="carousel-btn">Redeem</button>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="assets/product6.jpg" alt="Product 6" loading="lazy">
+                        <h3>Bluetooth Speaker</h3>
+                        <p>Portable music</p>
+                        <span class="product-price">$25.00</span>
+                        <button class="carousel-btn">Redeem</button>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="assets/product7.jpg" alt="Product 7" loading="lazy">
+                        <h3>Jar</h3>
+                        <p>Portable Jar</p>
+                        <span class="product-price">$25.00</span>
+                        <button class="carousel-btn">Redeem</button>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="assets/product8.jpg" alt="Product 8" loading="lazy">
+                        <h3>Bluetooth Speaker</h3>
+                        <p>Portable music</p>
+                        <span class="product-price">$25.00</span>
+                        <button class="carousel-btn">Redeem</button>
+                    </div>
+
+                    <!-- Add more products as needed -->
+                </div>
+            </div>
+            <button class="carousel-arrow right" id="carousel-next" aria-label="Next"
+                style="position:absolute; right:0; top:50%; transform:translateY(-50%); background:transparent; border:none; box-shadow:none; width:44px; height:44px; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:2;">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="12" fill="#007bff" />
+                    <path d="M10 8l4 4-4 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
+        </div>
+        <!-- Product Carousel End -->
+        <!-- Store Payment Facilities Start -->
+        <section class="payment-facilities">
+            <h2 class="payment-heading">Store Payment Facilities</h2>
+            <div class="payment-underline"></div>
+            <div class="payment-methods">
+                <div class="payment-method" style="--i:0;">
+                    <img src="assets/debit-card.webp" alt="Debit Card" class="payment-logo" loading="lazy">
+                    <h3>Debit Card</h3>
+                    <p>Pay securely using all major debit cards. Fast, safe, and convenient for every purchase.</p>
+                </div>
+                <div class="payment-method" style="--i:1;">
+                    <img src="assets/paypal.svg" alt="PayPal" class="payment-logo" loading="lazy">
+                    <h3>PayPal</h3>
+                    <p>Use your PayPal account for quick checkout and buyer protection on every transaction.</p>
+                </div>
+                <div class="payment-method" style="--i:2;">
+                    <img src="assets/upi.webp" alt="Upi" class="payment-logo" loading="lazy">
+                    <h3>Upi</h3>
+                    <p>Enjoy seamless payments with Upi, supporting cards, wallets, and more worldwide.</p>
+                </div>
+            </div>
+        </section>
+        <section class="testimonials">
+            <h2>What Our Users Say</h2>
+            <div class="testimonial-list">
+                <div class="testimonial-card">
+                    <p>"Great rewards and fast delivery!"</p>
+                    <span>- Priya S.</span>
+                    <div class="testimonial-rating">
+    <span>★★★★★</span>
+</div>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Easy to use and lots of options."</p>
+                    <span>- Rahul K.</span>
+                    <div class="testimonial-rating">
+    <span>★★★★★</span>
+</div>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Redeeming points was super simple!"</p>
+                    <span>- Ankit M.</span>
+                    <div class="testimonial-rating">
+    <span>★★★★★</span>
+</div>
+                </div>
+            </div>
+        </section>
+        <section class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <details>
+                    <summary>How do I earn points?</summary>
+                    <p>You earn points by making purchases, referring friends, and participating in special promotions.</p>
+                </details>
+                <details>
+                    <summary>How can I redeem my points?</summary>
+                    <p>Browse the shop, add products to your cart, and use your points at checkout to redeem rewards.</p>
+                </details>
+                <details>
+                    <summary>Are there any limits on redemption?</summary>
+                    <p>Some products may have minimum point requirements or limited availability. Check product details for more info.</p>
+                </details>
+                <details>
+                    <summary>How do I contact support?</summary>
+                    <p>Use the Help & Support chat on the page or email us at support@rewardingnation.com.</p>
+                </details>
+            </div>
+        </section>
+    </main>
+    <div class="help-support-sticky" title="Help & Support">
+        <span class="help-support-icon">
+            <!-- Chat/Help SVG icon -->
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="12" fill="#007bff" />
+                <path
+                    d="M8 10.5C8 9.11929 9.11929 8 10.5 8H13.5C14.8807 8 16 9.11929 16 10.5C16 11.3284 15.3284 12 14.5 12H12V13.5"
+                    stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <circle cx="12" cy="17" r="1" fill="#fff" />
+            </svg>
+        </span>
+        <span class="help-support-text">Help & Support</span>
+    </div>
+
+    <!-- Help & Support Chat Popup -->
+    <div class="chat-popup-overlay" id="chat-popup-overlay"></div>
+    <div class="chat-popup" id="chat-popup">
+        <div class="chat-popup-header">
+            <span>Help & Support Chat</span>
+            <button class="chat-popup-close" id="chat-popup-close" title="Close">&times;</button>
+        </div>
+        <div class="chat-popup-messages" id="chat-popup-messages">
+            <!-- Messages will appear here -->
+        </div>
+        <form class="chat-popup-form" id="chat-popup-form" autocomplete="off">
+            <input type="text" id="chat-popup-input" placeholder="Type your message..." required />
+            <button type="submit" id="chat-popup-send">Send</button>
+        </form>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scroll-to-top" title="Scroll to Top" aria-label="Scroll to Top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="12" fill="#28a745" />
+            <path d="M12 6l-6 6h4v6h4v-6h4l-6-6z" fill="#fff" />
+        </svg>
+    </button>
+    <footer class="site-footer">
+        <div class="footer-row">
+            <div class="footer-newsletter">
+                <form class="newsletter-signup">
+                    <div class="newsletter-row">
+                        <input type="email" id="footer-newsletter-email" placeholder="Enter your email" required>
+                        <button type="submit">Subscribe</button>
+                    </div>
+                </form>
+            </div>
+            <div class="how-it-works">
+                <a href="#" title="Facebook" class="social-icon"><img src="assets/facebook.svg" alt="Facebook"></a>
+                <a href="#" title="Instagram" class="social-icon"><img src="assets/instagram.svg" alt="Instagram"></a>
+                <a href="#" title="YouTube" class="social-icon"><img src="assets/youtube.svg" alt="YouTube"></a>
+                <a href="#" title="VK" class="social-icon"><img src="assets/vk.svg" alt="VK"></a>
+                <a href="#" title="Twitter" class="social-icon"><img src="assets/twitter.svg" alt="Twitter"></a>
+            </div>
+        </div>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>Shop Location</h4>
+                <p>
+                    <img src="assets/location.png" alt="Location"
+                        style="width:18px;vertical-align:middle;margin-right:6px;">
+                    Pune, Maharashtra <br>
+                    <img src="assets/telephone.png" alt="Telephone"
+                        style="width:18px;vertical-align:middle;margin-right:6px;">
+                    (123) 456-7890 <br>
+                    <img src="assets/email.png" alt="Email" style="width:18px;vertical-align:middle;margin-right:6px;">
+                    support@rewardingnation.com <br>
+                    🏢 BPSI
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="account.html">My Account</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Recent Posts</h4>
+                <ul>
+                    <li><a href="#">How to Redeem Points</a></li>
+                    <li><a href="#">Top 10 Reward Products</a></li>
+                    <li><a href="#">Exclusive Offers</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>About</h4>
+                <p>RewardingNation is your trusted platform for redeeming points and discovering exclusive deals. Join
+                    us and start earning today!</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            Copyright 2023 © All rights reserved by RewardingNation | Created by Sandeep
+        </div>
+    </footer>
+    <script src="main.js" defer></script>
+    <script>
+    // About popup logic
+    const aboutLink = document.getElementById('about-link');
+    const aboutPopup = document.getElementById('about-popup');
+    document.addEventListener('click', function(e) {
+        if (aboutLink.contains(e.target)) {
+            e.preventDefault();
+            const rect = aboutLink.getBoundingClientRect();
+            aboutPopup.style.left = rect.left + window.scrollX + 'px';
+            aboutPopup.style.top = rect.bottom + window.scrollY + 8 + 'px';
+            if (aboutPopup.style.display === 'block') {
+                aboutPopup.style.opacity = '0';
+                aboutPopup.style.transform = 'translateY(10px)';
+                setTimeout(()=>{aboutPopup.style.display = 'none';}, 200);
+            } else {
+                aboutPopup.style.display = 'block';
+                setTimeout(()=>{
+                  aboutPopup.style.opacity = '1';
+                  aboutPopup.style.transform = 'translateY(0)';
+                }, 10);
+            }
+        } else if (!aboutPopup.contains(e.target)) {
+            if (aboutPopup.style.display === 'block') {
+                aboutPopup.style.opacity = '0';
+                aboutPopup.style.transform = 'translateY(10px)';
+                setTimeout(()=>{aboutPopup.style.display = 'none';}, 200);
+            }
+        }
+    });
+    </script>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('search-input');
+    const clearBtn = document.querySelector('.clear-search');
+    if (searchInput && clearBtn) {
+        searchInput.addEventListener('input', function() {
+            clearBtn.style.display = this.value ? 'flex' : 'none';
+        });
+        clearBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            clearBtn.style.display = 'none';
+            searchInput.focus();
+        });
+    }
+});
+</script>
+</body>
+
+</html>
