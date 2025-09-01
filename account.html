@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RewardingNation</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+    <style>
+    .auth-welcome {
+      text-align: center;
+      color: #fff;
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+      font-weight: 700;
+      min-height: 1.5em;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.18), 0 1.5px 4px rgba(0,123,255,0.10);
+    }
+    .auth-container {
+      max-width: 400px;
+      margin: 24px auto 40px auto;
+      background: rgba(255,255,255,0.97);
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(0,123,255,0.13);
+      padding: 32px 24px 24px 24px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .auth-tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 24px;
+      position: relative;
+    }
+    .auth-tab {
+      background: none;
+      border: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #007bff;
+      padding: 10px 32px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin: 0 4px;
+      transition: border 0.2s, color 0.2s, background 0.2s;
+      position: relative;
+      z-index: 2;
+    }
+    .auth-tab.active {
+      color: #fff;
+      background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%);
+      border-radius: 18px 18px 0 0;
+      box-shadow: 0 2px 8px rgba(0,123,255,0.10);
+      border-bottom: 2px solid #007bff;
+    }
+    .auth-tab-underline {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      width: 120px;
+      background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%);
+      border-radius: 2px;
+      transition: transform 0.4s cubic-bezier(.68,-0.55,.27,1.55), width 0.4s cubic-bezier(.68,-0.55,.27,1.55);
+      z-index: 1;
+    }
+    .auth-forms {
+      width: 100%;
+    }
+    .auth-form {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s cubic-bezier(.68,-0.55,.27,1.55), transform 0.4s cubic-bezier(.68,-0.55,.27,1.55);
+      background: #fff;
+      transform: translateX(40px) scale(0.98);
+      margin: 0;
+    }
+    .auth-form.active {
+      display: flex;
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 2;
+      transform: translateX(0) scale(1);
+      position: static;
+      height: auto;
+    }
+    .auth-form h2 {
+      text-align: center;
+      color: #007bff;
+      margin-bottom: 8px;
+    }
+    .auth-form input {
+      padding: 14px 16px;
+      border-radius: 8px;
+      border: 1.5px solid #eaf4fb;
+      font-size: 1rem;
+      outline: none;
+      transition: border 0.2s, box-shadow 0.2s, background 0.2s;
+      background: #fff;
+      box-shadow: 0 2px 12px rgba(0,123,255,0.08), 0 1.5px 4px rgba(0,0,0,0.04);
+    }
+    .auth-form input:focus {
+      border: 1.5px solid #007bff;
+      box-shadow: 0 2px 8px rgba(0,123,255,0.10);
+      background: #f4faff;
+    }
+    .auth-password-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .toggle-password {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: #007bff;
+      user-select: none;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .toggle-password:hover {
+      opacity: 1;
+    }
+    .auth-forgot-wrap {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 2px;
+    }
+    .auth-forgot {
+      color: #007bff;
+      font-size: 0.98rem;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .auth-forgot:hover {
+      color: #0056b3;
+      text-decoration: underline;
+    }
+    .auth-form-actions {
+      margin-top: 8px;
+      display: flex;
+      justify-content: center;
+    }
+    .auth-form button {
+      width: 100%;
+      margin-top: 0;
+      background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .auth-form button:hover {
+      background: linear-gradient(90deg, #00c6ff 0%, #007bff 100%);
+      transform: scale(1.04);
+    }
+    @media (max-width: 600px) {
+      .auth-container {
+        max-width: 98vw;
+        padding: 18px 4vw 18px 4vw;
+      }
+      .auth-form input {
+        font-size: 1rem;
+        padding: 12px 10px;
+      }
+      .auth-form button {
+        font-size: 1rem;
+        padding: 10px 0;
+      }
+    }
+    .auth-create-account-wrap {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 12px;
+    }
+    .auth-create-account {
+      color: #007bff;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: color 0.2s;
+      font-weight: 500;
+    }
+    .auth-create-account:hover {
+      color: #0056b3;
+      text-decoration: underline;
+    }
+    .eye-icon {
+      display: block;
+      pointer-events: none;
+    }
+    .auth-remember-wrap {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      margin-bottom: 2px;
+    }
+    .auth-remember-label {
+      font-size: 1rem;
+      color: #222;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .auth-remember-checkbox {
+      accent-color: #007bff;
+      width: 16px;
+      height: 16px;
+      margin-right: 4px;
+    }
+    .auth-social-login {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 18px;
+      width: 100%;
+    }
+    .auth-social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.08rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      background: #fff;
+    }
+    .auth-social-btn.google {
+      color: #222;
+      border: 1.5px solid #eaf4fb;
+    }
+    .auth-social-btn.facebook {
+      color: #fff;
+      background: #1877f2;
+      border: 1.5px solid #1877f2;
+    }
+    .auth-social-btn.google:hover {
+      background: #f4faff;
+      transform: scale(1.03);
+    }
+    .auth-social-btn.facebook:hover {
+      background: #145db2;
+      border-color: #145db2;
+      transform: scale(1.03);
+    }
+    .auth-social-icon {
+      width: 22px;
+      height: 22px;
+      margin-right: 6px;
+    }
+    .auth-or-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin: 18px 0 10px 0;
+      color: #aaa;
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+    .auth-or-divider span {
+      background: #fff;
+      padding: 0 16px;
+      z-index: 1;
+    }
+    .auth-or-divider:before, .auth-or-divider:after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #eaf4fb;
+      margin: 0 4px;
+    }
+    </style>
+</head>
+<body>
+<header>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <div class="logo">
+                <img src="assets/logo.webp" alt="RewardingNation Logo">
+            </div>
+            <a href="index.html" class="nav-link"><span class="nav-icon"><img src="assets/home.png" alt="Home" style="width:20px;vertical-align:middle;margin-right:6px;"></span> Home</a>
+            <a href="shop.html" class="nav-link"><span class="nav-icon"><img src="assets/shop.png" alt="Shop" style="width:20px;vertical-align:middle;margin-right:6px;"></span> Shop</a>
+            <a href="account.html" class="nav-link"><span class="nav-icon"><img src="assets/myprofile.png" alt="My Account" style="width:20px;vertical-align:middle;margin-right:6px;"></span> My Account</a>
+            <a href="#" class="nav-link" id="about-link">
+                <span class="nav-icon">
+                    <img src="assets/about.svg" alt="About" style="width:20px;vertical-align:middle;margin-right:6px;opacity:1;">
+                </span>
+                About
+            </a>
+            <div id="about-popup" style="display:none; position:absolute; background:#fff; color:#222; border-radius:14px; border:1.5px solid #e0e0e0; box-shadow:0 8px 32px rgba(0,0,0,0.18); padding:22px 28px 18px 28px; z-index:1000; min-width:260px; max-width:340px; font-size:1rem; font-family:Montserrat,sans-serif; transition:opacity 0.25s, transform 0.25s; opacity:0; transform:translateY(10px);">
+                <div style="position:absolute;top:-14px;left:36px;width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;border-bottom:14px solid #fff;filter:drop-shadow(0 -2px 2px rgba(0,0,0,0.08));"></div>
+                <h2 style="margin:0 0 8px 0;font-size:1.2rem;font-weight:700;color:#007bff;letter-spacing:0.5px;">Brands Of Smartcookie</h2>
+                <p style="margin:0;font-size:0.98rem;line-height:1.6;color:#444;">Low-carb, gluten-free, keto-friendly protein cookies from Smart Baking Company.<br>Example: a 12-pack of chocolate chip SmartCookies is high in protein & fiber, zero net carbs, diabetic-friendly.</p>
+            </div>
+        </div>
+        <div class="navbar-center">
+            <form class="search-bar" onsubmit="return false;">
+                <select id="category-select">
+                    <option value="">All Categories</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="fashion">Fashion</option>
+                    <option value="books">Books</option>
+                    <option value="grocery">Grocery</option>
+                </select>
+                <input type="text" id="search-input" placeholder="Search products...">
+                <button id="search-button" title="Search">&#128269;</button>
+            </form>
+        </div>
+        <div class="navbar-right">
+            <div class="cart" id="cart-area" title="View Cart">
+                <span class="cart-icon">&#128722;</span>
+                <span class="cart-badge" id="cart-badge">0</span>
+                <span class="cart-price" id="cart-price">$0.00</span>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- User Icon and Welcome Message -->
+<div class="auth-welcome"><span id="auth-welcome-typewriter"></span></div>
+<div class="auth-container">
+  <!-- Social Login Buttons -->
+  <div class="auth-social-login">
+    <button class="auth-social-btn google" type="button" aria-label="Login with Google">
+      <img src="assets/google.png" alt="Google" class="auth-social-icon"> Continue with Google
+    </button>
+    <button class="auth-social-btn facebook" type="button" aria-label="Login with Facebook">
+      <img src="assets/facebook.svg" alt="Facebook" class="auth-social-icon"> Continue with Facebook
+    </button>
+  </div>
+  <div class="auth-or-divider"><span>OR</span></div>
+  <div class="auth-tabs">
+    <button class="auth-tab active" id="login-tab">Login</button>
+    <button class="auth-tab" id="register-tab">Register</button>
+  </div>
+  <div class="auth-forms">
+    <!-- Login Form -->
+    <form id="login-form" class="auth-form">
+      <input type="email" placeholder="Email" required pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" title="Please enter a valid email address (must contain @ and a domain)">
+      <div class="auth-password-wrap">
+        <input type="password" placeholder="Password" required minlength="6" title="Password must be at least 6 characters long" id="login-password">
+        <span class="toggle-password" data-target="login-password">
+          <svg class="eye-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#007bff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="8" ry="5"/><circle cx="12" cy="12" r="2.5"/></svg>
+        </span>
+      </div>
+      <div class="auth-remember-wrap">
+        <label class="auth-remember-label">
+          <input type="checkbox" class="auth-remember-checkbox"> Remember Me
+        </label>
+      </div>
+      <div class="auth-forgot-wrap">
+        <a href="#" class="auth-forgot">Forgot Password?</a>
+      </div>
+      <div class="auth-form-actions">
+        <button type="submit">Login</button>
+      </div>
+      <div class="auth-create-account-wrap">
+        <a href="#" class="auth-create-account">Create New Account</a>
+      </div>
+    </form>
+    <!-- Register Form -->
+    <form id="register-form" class="auth-form">
+      <input type="text" placeholder="Full Name" required minlength="2" title="Please enter your full name (at least 2 characters)">
+      <input type="email" placeholder="Email" required pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" title="Please enter a valid email address (must contain @ and a domain)">
+      <div class="auth-password-wrap">
+        <input type="password" id="reg-password" placeholder="Password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$" title="Password must be at least 8 characters, include uppercase, lowercase, a number, and a special character">
+        <span class="toggle-password" data-target="reg-password">
+          <svg class="eye-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#007bff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="8" ry="5"/><circle cx="12" cy="12" r="2.5"/></svg>
+        </span>
+      </div>
+      <div class="auth-password-wrap">
+        <input type="password" id="reg-confirm-password" placeholder="Confirm Password" required minlength="8" title="Passwords must match and be at least 8 characters long">
+        <span class="toggle-password" data-target="reg-confirm-password">
+          <svg class="eye-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#007bff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="8" ry="5"/><circle cx="12" cy="12" r="2.5"/></svg>
+        </span>
+      </div>
+      <div class="auth-form-actions">
+        <button type="submit">Register</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+document.getElementById('login-tab').onclick = function() {
+  document.getElementById('login-tab').classList.add('active');
+  document.getElementById('register-tab').classList.remove('active');
+  document.getElementById('login-form').classList.add('active');
+  document.getElementById('register-form').classList.remove('active');
+};
+document.getElementById('register-tab').onclick = function() {
+  document.getElementById('register-tab').classList.add('active');
+  document.getElementById('login-tab').classList.remove('active');
+  document.getElementById('register-form').classList.add('active');
+  document.getElementById('login-form').classList.remove('active');
+};
+// Set initial state
+window.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('login-form').classList.add('active');
+  document.getElementById('register-form').classList.remove('active');
+});
+
+// Password match validation for register form
+const regForm = document.getElementById('register-form');
+if (regForm) {
+  regForm.addEventListener('submit', function(e) {
+    const pwd = document.getElementById('reg-password').value;
+    const cpwd = document.getElementById('reg-confirm-password').value;
+    if (pwd !== cpwd) {
+      e.preventDefault();
+      document.getElementById('reg-confirm-password').setCustomValidity('Passwords do not match');
+      document.getElementById('reg-confirm-password').reportValidity();
+    } else {
+      document.getElementById('reg-confirm-password').setCustomValidity('');
+    }
+  });
+}
+
+// Modern password visibility toggle with SVG
+const eyeSVG = '<svg class="eye-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#007bff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="8" ry="5"/><circle cx="12" cy="12" r="2.5"/></svg>';
+const eyeSlashSVG = '<svg class="eye-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#007bff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="8" ry="5"/><circle cx="12" cy="12" r="2.5"/><line x1="4" y1="20" x2="20" y2="4"/></svg>';
+Array.from(document.querySelectorAll('.toggle-password')).forEach(function(toggle) {
+  toggle.onclick = function() {
+    const target = document.getElementById(this.getAttribute('data-target'));
+    if (target.type === 'password') {
+      target.type = 'text';
+      this.innerHTML = eyeSlashSVG;
+    } else {
+      target.type = 'password';
+      this.innerHTML = eyeSVG;
+    }
+  };
+});
+
+document.querySelector('.auth-create-account').onclick = function(e) {
+  e.preventDefault();
+  document.getElementById('register-tab').click();
+};
+
+// Typewriter effect for auth-welcome
+window.addEventListener('DOMContentLoaded', function() {
+  var text = "Welcome back! Please login to your account.";
+  var el = document.getElementById('auth-welcome-typewriter');
+  var idx = 0;
+  function typeWriter() {
+    if (idx <= text.length) {
+      el.textContent = text.slice(0, idx);
+      idx++;
+      setTimeout(typeWriter, 60);
+    }
+  }
+  typeWriter();
+});
+
+// Animated Tab Underline
+window.addEventListener('DOMContentLoaded', function() {
+  const tabs = document.querySelectorAll('.auth-tab');
+  const tabsContainer = document.querySelector('.auth-tabs');
+  let underline = document.createElement('div');
+  underline.className = 'auth-tab-underline';
+  tabsContainer.appendChild(underline);
+  function moveUnderline() {
+    const active = document.querySelector('.auth-tab.active');
+    if (active) {
+      const rect = active.getBoundingClientRect();
+      const parentRect = tabsContainer.getBoundingClientRect();
+      underline.style.width = rect.width + 'px';
+      underline.style.transform = `translateX(${rect.left - parentRect.left}px)`;
+    }
+  }
+  moveUnderline(); 
+  tabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+      setTimeout(moveUnderline, 10);
+    });
+  });
+  window.addEventListener('resize', moveUnderline);
+});
+
+// About popup logic
+const aboutLink = document.getElementById('about-link');
+const aboutPopup = document.getElementById('about-popup');
+document.addEventListener('click', function(e) {
+    if (aboutLink.contains(e.target)) {
+        e.preventDefault();
+        const rect = aboutLink.getBoundingClientRect();
+        aboutPopup.style.left = rect.left + window.scrollX + 'px';
+        aboutPopup.style.top = rect.bottom + window.scrollY + 8 + 'px';
+        if (aboutPopup.style.display === 'block') {
+            aboutPopup.style.opacity = '0';
+            aboutPopup.style.transform = 'translateY(10px)';
+            setTimeout(()=>{aboutPopup.style.display = 'none';}, 200);
+        } else {
+            aboutPopup.style.display = 'block';
+            setTimeout(()=>{
+              aboutPopup.style.opacity = '1';
+              aboutPopup.style.transform = 'translateY(0)';
+            }, 10);
+        }
+    } else if (!aboutPopup.contains(e.target)) {
+        if (aboutPopup.style.display === 'block') {
+            aboutPopup.style.opacity = '0';
+            aboutPopup.style.transform = 'translateY(10px)';
+            setTimeout(()=>{aboutPopup.style.display = 'none';}, 200);
+        }
+    }
+});
+</script>
+<!-- Scroll to Top Button -->
+<button class="scroll-to-top" id="scroll-to-top" title="Scroll to Top" aria-label="Scroll to Top">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="12" fill="#28a745"/>
+      <path d="M12 6l-6 6h4v6h4v-6h4l-6-6z" fill="#fff"/>
+  </svg>
+</button>
+<footer class="site-footer">
+  <div class="footer-row">
+      <div class="footer-newsletter">
+          <form class="newsletter-signup">
+              <div class="newsletter-row">
+                  <input type="email" id="footer-newsletter-email" placeholder="Enter your email" required>
+                  <button type="submit">Subscribe</button>
+              </div>
+          </form>
+      </div>
+      <div class="how-it-works">
+          <a href="#" title="Facebook" class="social-icon"><img src="assets/facebook.svg" alt="Facebook"></a>
+          <a href="#" title="Instagram" class="social-icon"><img src="assets/instagram.svg" alt="Instagram"></a>
+          <a href="#" title="YouTube" class="social-icon"><img src="assets/youtube.svg" alt="YouTube"></a>
+          <a href="#" title="VK" class="social-icon"><img src="assets/vk.svg" alt="VK"></a>
+          <a href="#" title="Twitter" class="social-icon"><img src="assets/twitter.svg" alt="Twitter"></a>
+      </div>
+  </div>
+  <div class="footer-content">
+      <div class="footer-col">
+          <h4>Shop Location</h4>
+          <p>
+              <img src="assets/location.png" alt="Location"
+                  style="width:18px;vertical-align:middle;margin-right:6px;">
+              Pune, Maharashtra <br>
+              <img src="assets/telephone.png" alt="Telephone"
+                  style="width:18px;vertical-align:middle;margin-right:6px;">
+              (123) 456-7890 <br>
+              <img src="assets/email.png" alt="Email" style="width:18px;vertical-align:middle;margin-right:6px;">
+              support@rewardingnation.com <br>
+              🏢 BPSI
+          </p>
+      </div>
+      <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="shop.html">Shop</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="account.html">My Account</a></li>
+          </ul>
+      </div>
+      <div class="footer-col">
+          <h4>Recent Posts</h4>
+          <ul>
+              <li><a href="#">How to Redeem Points</a></li>
+              <li><a href="#">Top 10 Reward Products</a></li>
+              <li><a href="#">Exclusive Offers</a></li>
+          </ul>
+      </div>
+      <div class="footer-col">
+          <h4>About</h4>
+          <p>RewardingNation is your trusted platform for redeeming points and discovering exclusive deals. Join
+              us and start earning today!</p>
+      </div>
+  </div>
+  <div class="footer-bottom">
+      Copyright 2023 © All rights reserved by RewardingNation | Created by Sandeep
+  </div>
+</footer>
+<div class="help-support-sticky" title="Help & Support">
+  <span class="help-support-icon">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="12" fill="#007bff"/>
+      <path d="M8 10.5C8 9.11929 9.11929 8 10.5 8H13.5C14.8807 8 16 9.11929 16 10.5C16 11.3284 15.3284 12 14.5 12H12V13.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="12" cy="17" r="1" fill="#fff"/>
+    </svg>
+  </span>
+  <span class="help-support-text">Help & Support</span>
+</div>
+
+<div class="chat-popup-overlay" id="chat-popup-overlay"></div>
+<div class="chat-popup" id="chat-popup">
+    <div class="chat-popup-header">
+        <span>Help & Support Chat</span>
+        <button class="chat-popup-close" id="chat-popup-close" title="Close">&times;</button>
+    </div>
+    <div class="chat-popup-messages" id="chat-popup-messages">
+        <!-- Messages will appear here -->
+    </div>
+    <form class="chat-popup-form" id="chat-popup-form" autocomplete="off">
+        <input type="text" id="chat-popup-input" placeholder="Type your message..." required />
+        <button type="submit" id="chat-popup-send">Send</button>
+    </form>
+</div>
+
+</body>
+<script src="main.js" defer></script>
+</html>
